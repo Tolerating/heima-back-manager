@@ -1,5 +1,5 @@
 # heima-back-manager
-
+b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=145
 ### 目录介绍
 ```
 ```
@@ -31,4 +31,10 @@ export default MyHttpServer;
 //在main.js中使用
 import httpServer from '@/plugins/http'
 Vue.use(httpServer);
+```
+
+### 合并分支
+```
+1. 切到主分支
+2. git merge 分支名
 ```
