@@ -1,24 +1,10 @@
 # heima-back-manager
 
-## Project setup
+### element-ui的安装与导入
 ```
-npm install
-```
+npm i element-ui -S
 
-### Compiles and hot-reloads for development
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
