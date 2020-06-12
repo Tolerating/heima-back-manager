@@ -38,3 +38,11 @@ Vue.use(httpServer);
 1. 切到主分支
 2. git merge 分支名
 ```
+
+### vue过滤器
+```js
+Vue.filter('过滤器名字',(value)=>{});
+
+//使用
+{{datetime | 过滤器名字}}
+```

@@ -41,13 +41,32 @@
       <el-table-column
         prop="create_time"
         label="创建时间">
+        <!-- 如果单元格内显示的内容不是字符串(文本),
+        需要给被显示的内容包裹一个template
+        template内部要用的数据,得设置slot-scope属性
+        该属性的值是要用数据create_time的数据源userlist
+         -->
+         <!-- slot-scope的值userlist其实就是el-table绑定的数据userlist
+         [slot-scope会自动找上一级的数据源]
+         userlist.row就是数组中的每个对象 -->
+         <template slot-scope="userlist">
+           {{userlist.row.create_time | fmdate}}
+         </template>
       </el-table-column>
       <el-table-column
         prop="mg_state"
         label="用状态">
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.mg_state"></el-switch>
+        </template>
       </el-table-column>
       <el-table-column
         label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" plain type="primary" icon="el-icon-edit" circle></el-button>
+          <el-button size="mini" plain type="success" icon="el-icon-check" circle></el-button>
+          <el-button size="mini" plain type="danger" icon="el-icon-delete" circle></el-button>
+        </template>
       </el-table-column>
     </el-table>
     <!-- 4.分页 -->
