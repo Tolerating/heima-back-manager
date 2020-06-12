@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
 import * as login from './modules/login'
-import * as users from './modules/users'
+require('./modules/users')
 fnCreate(login);
-fnCreate(users);
+// fnCreate(users,false);
 /**
  * 创建mock模拟数据
  * @param {*} mod 模块名
