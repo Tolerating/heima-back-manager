@@ -47,8 +47,8 @@
         <el-table-column label="操作">
             <template slot-scope="scope">
                 <el-button size="mini" plain type="primary" icon="el-icon-edit" circle @click="showEditUserDia(scope.row)"></el-button>
-                <el-button size="mini" plain type="danger" icon="el-icon-delete" @click="showDeleteUserMsg(scope.row.id)" circle></el-button>
-                <el-button size="mini" plain type="success" icon="el-icon-check" circle></el-button>
+                <el-button size="mini" plain type="danger" icon="el-icon-delete" circle @click="showDeleteUserMsg(scope.row.id)"></el-button>
+                <el-button size="mini" plain type="success" icon="el-icon-check" circle @click="showSetUserRoleDia(scope.row)"></el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -98,6 +98,25 @@
             <el-button type="primary" @click="editUser">确 定</el-button>
         </div>
     </el-dialog>
+
+    <!-- 分配角色的对话框 -->
+    <el-dialog title="分配角色" :visible.sync="dialogFormVisibleRole">
+        <el-form>
+            <el-form-item label="用户名" label-width="100px">
+                {{currUserName}}
+            </el-form-item>
+            <el-form-item label="角色" label-width="100px">
+                <el-select v-model="currRoleId" placeholder="请选择角色">
+                    <el-option label="请选择" disabled="" :value="-1"></el-option>
+                    <el-option v-for="(item,index) in roles" :label="item.roleName" :value="item.id" :key="index"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisibleRole = false">取 消</el-button>
+            <el-button type="primary" @click="setRole">确 定</el-button>
+        </div>
+    </el-dialog>
 </el-card>
 </template>
 
@@ -112,7 +131,8 @@ export default {
             pagesize: 2,
             userlist: [],
             dialogFormVisibleAdd: false,
-            dialogFormVisibleEdit:false,
+            dialogFormVisibleEdit: false,
+            dialogFormVisibleRole:false,
             addForm: {
                 username: "",
                 password: "",
@@ -130,7 +150,13 @@ export default {
                     message: '密码不能为空',
                     trigger: 'blur'
                 }]
-            }
+            },
+            //分配角色
+            currRoleId:-1,
+            currUserId:-1,
+            currUserName:"",
+            // 保存所有角色数据
+            roles:[]
         }
     },
     created() {
@@ -191,9 +217,9 @@ export default {
             this.getUserList();
         },
         // 添加用户 - 打开对话框
-        showAddUserDia(){
-          this.addForm = {};
-          this.dialogFormVisibleAdd = true;
+        showAddUserDia() {
+            this.addForm = {};
+            this.dialogFormVisibleAdd = true;
         },
         // 添加用户
         addUser() {
@@ -238,12 +264,12 @@ export default {
                 const res = await this.$http.delete(`users/${id}`);
                 console.log(res);
                 if (res.data.meta.status === 200) {
-                  this.pagenum = 1;
-                  this.getUserList();
-                  this.$message({
-                      type: 'success',
-                      message: '删除成功!'
-                  });
+                    this.pagenum = 1;
+                    this.getUserList();
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
                 }
             }).catch(() => {
                 this.$message({
@@ -253,35 +279,69 @@ export default {
             });
         },
         // 编辑用户 - 显示对话框
-        showEditUserDia(user){
-          console.log(user);
-          this.addForm = user;
-          this.dialogFormVisibleEdit = true;
+        showEditUserDia(user) {
+            console.log(user);
+            this.addForm = user;
+            this.dialogFormVisibleEdit = true;
         },
         // 编辑用户,发送请求
-        async editUser(){
-          this.dialogFormVisibleEdit = false;
-          const res = await this.$http.put(`users/${this.addForm.id}`);
-          console.log(res);
-          const {meta:{msg,status}} = res.data;
-          if (status === 200) {
-            this.pagenum = 1;
-            this.getUserList();
-            this.$message.success(msg);
-          }else{
-            this.$message.warning(msg);
-          }
+        async editUser() {
+            this.dialogFormVisibleEdit = false;
+            const res = await this.$http.put(`users/${this.addForm.id}`);
+            console.log(res);
+            const {
+                meta: {
+                    msg,
+                    status
+                }
+            } = res.data;
+            if (status === 200) {
+                this.pagenum = 1;
+                this.getUserList();
+                this.$message.success(msg);
+            } else {
+                this.$message.warning(msg);
+            }
         },
         // 更改用户状态
-        async changeMsgState(user){
-          const res = await this.$http.put(`users/${user.id}/${user.type}`);
-          const {meta:{msg,status}} = res.data;
-          if (status === 200) {
-            this.$message.success(msg);
-          }else{
-            this.$message.warning(msg);
-          }
+        async changeMsgState(user) {
+            const res = await this.$http.put(`users/${user.id}/${user.type}`);
+            const {
+                meta: {
+                    msg,
+                    status
+                }
+            } = res.data;
+            if (status === 200) {
+                this.$message.success(msg);
+            } else {
+                this.$message.warning(msg);
+            }
         },
+        // 分配角色 - 显示对话框
+        async showSetUserRoleDia(user) {
+            this.dialogFormVisibleRole = true;
+            this.currUserName = user.username;
+            this.currUserId = user.id;
+            const res = await this.$http.get(`users/${user.id}`);
+            this.currRoleId = res.data.data.rid;
+            const allRoles = await this.$http.get('roles');
+            this.roles = allRoles.data.data;
+            console.log(allRoles);
+        },
+        // 修改用户角色
+        async setRole(){
+            const res = await this.$http.put(`/users/${this.currUserId}/${this.currRoleId}`);
+            console.log(res);
+            this.dialogFormVisibleRole = false;
+            const {meta:{msg,status}} = res.data;
+            if (status === 200) {
+                this.$message.success(msg);
+            }else{
+                this.$message.warning(msg);
+            }
+
+        }
 
     }
 }

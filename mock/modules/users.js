@@ -1,4 +1,9 @@
 import Mock from 'mockjs'
+/*
+ *@description: 用户管理
+ *@author: 刘凯
+ *@date: 2020-06-14 22:57:28
+*/
 // export function getUserList(){
 //     return{
 //         url:"/users",
@@ -28,7 +33,8 @@ import Mock from 'mockjs'
 //     }
 // }
 /* 获取用户 */
-Mock.mock(new RegExp("/users"),"get",(opts)=>{
+Mock.mock(/\/users[^/]/,"get",(opts)=>{
+    console.warn("请求接口:获取用户",opts);
     const {url} = opts;
     let data = {};
     url.split("?")[1].split("&").forEach((item)=>{
@@ -63,6 +69,7 @@ Mock.mock(new RegExp("/users"),"get",(opts)=>{
 
 /* 添加用户 */
 Mock.mock(new RegExp("/users"),"post",(opts)=>{
+    console.warn("请求接口:添加用户",opts);
     const {username,email,mobile} = JSON.parse(opts.body);
     console.log(JSON.parse(opts.body));
     return Mock.mock({
@@ -87,7 +94,7 @@ Mock.mock(new RegExp("/users"),"post",(opts)=>{
 
 /* 删除用户 */
 Mock.mock(new RegExp("/users"),"delete",(opts)=>{
-    console.warn("删除用户",opts);
+    console.warn("请求接口:删除用户",opts);
     return {
         "data": null,
         "meta": {
@@ -99,7 +106,7 @@ Mock.mock(new RegExp("/users"),"delete",(opts)=>{
 
 /* 编辑用户 */
 Mock.mock(new RegExp("/users/.$"),"put",(opts)=>{
-    console.warn("编辑用户",opts);
+    console.warn("请求接口:编辑用户",opts);
     return {
         "data": {
             "id": 503,
@@ -117,7 +124,7 @@ Mock.mock(new RegExp("/users/.$"),"put",(opts)=>{
 
 /* 更改用户状态 */
 Mock.mock(new RegExp("/users"+"/."+"/.$"),"put",(opts)=>{
-    console.warn("编辑用户",opts);
+    console.warn("请求接口:更改用户状态",opts);
     return {
         "data": {
             "id": 566,
@@ -131,5 +138,41 @@ Mock.mock(new RegExp("/users"+"/."+"/.$"),"put",(opts)=>{
             "msg": "设置状态成功",
             "status": 200
           }
+    }
+});
+
+/* 根据 ID 查询用户信息 */
+Mock.mock(new RegExp("/users(/[0-9]*)"),"get",(opts)=>{
+    console.warn("请求接口:根据 ID 查询用户信息",opts);
+    return {
+        "data": {
+            "id": 503,
+            "username": "admin3",
+            "rid": 32,
+            "mobile": "00000",
+            "email": "new@new.com"
+        },
+        "meta": {
+            "msg": "查询成功",
+            "status": 200
+        }
+    }
+});
+
+/* 分配用户角色 */
+Mock.mock(/\/users(\/[0-9]*)(\/\w*)$/,"put",(opts)=>{
+    console.warn("请求接口:分配用户角色",opts);
+    return {
+        "data": {
+            "id": 508,
+            "rid": "30",
+            "username": "asdf1",
+            "mobile": "123123",
+            "email": "adfsa@qq.com"
+        },
+        "meta": {
+            "msg": "设置角色成功",
+            "status": 200
+        }
     }
 });

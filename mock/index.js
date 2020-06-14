@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import * as login from './modules/login'
 require('./modules/users')
+require('./modules/role')
 fnCreate(login);
 // fnCreate(users,false);
 /**

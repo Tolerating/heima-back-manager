@@ -106,7 +106,7 @@
 ```json
 {
     "data": {
-        "totalpage": 5,
+        "total": 5,
         "pagenum": 4,
         "users": [
             {
@@ -219,7 +219,7 @@
 | 参数名  | 参数说明 | 备注 |
 | ------- | -------- | ---- |
 | id      | 用户 ID  |      |
-| role_id | 角色 ID  |      |
+| rid | 角色 ID  |      |
 | mobile  | 手机号   |      |
 | email   | 邮箱     |      |
 
@@ -230,7 +230,7 @@
     "data": {
         "id": 503,
         "username": "admin3",
-        "role_id": 0,
+        "rid": 0,
         "mobile": "00000",
         "email": "new@new.com"
     },
