@@ -1,5 +1,5 @@
 # heima-back-manager
-b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=152
+b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=166
 ### 目录介绍
 ```
 ```
@@ -37,6 +37,7 @@ Vue.use(httpServer);
 ```
 1. 切到主分支
 2. git merge 分支名
+3. git push
 ```
 
 ### vue过滤器
