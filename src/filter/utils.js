@@ -9,3 +9,8 @@ Vue.filter('fmdate',(v)=>{
 Vue.filter('number',(v)=>{
     return Number(v);
 });
+
+/* 强转字符类型 */
+Vue.filter('string',(v)=>{
+    return String(v);
+});

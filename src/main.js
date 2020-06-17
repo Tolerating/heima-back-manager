@@ -11,7 +11,7 @@ Vue.use(ElementUI)
 Vue.use(MyHttpServer)
 Vue.config.productionTip = false
 if(process.env.NODE_ENV !== 'production'){
-  console.warn("开发环境1");
+  console.warn("开发环境");
   require('../mock');
 }
 
