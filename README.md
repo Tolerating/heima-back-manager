@@ -1,7 +1,24 @@
 # heima-back-manager
 b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=152
 ### 目录介绍
+window下使用命令符`tree [drive:][path] [/F] [/A]`
+> 参数:
+>   drive 盘符
+    path 文件路径
+    /F 递归列出所有文件
+    /A 使用ASCII字符,而不是用扩展字符
+输出到一个文件中:`tree [drive:][path] > [drive:][path]\r.txt`
 ```
+├─mock //开发阶段数据模拟
+├─public
+└─src
+    ├─assets // 静态资源
+    ├─components //组件
+    ├─filter //vue过滤器
+    ├─plugins  //vue插件
+    ├─router  //路由
+    ├─store  //vuex
+    └─views    //视图
 ```
 
 ### element-ui的安装与导入
@@ -46,3 +63,9 @@ Vue.filter('过滤器名字',(value)=>{});
 //使用
 {{datetime | 过滤器名字}}
 ```
+
+## 自定义全局组件
+在 `main.js`中,引入组件后,`Vue.component('全局组件名' || 引入组件.name,引入的组件)`
+
+## 权限系统实现
+用户登录后,后台返回一个`token`,进入主页面请求用户左侧菜单栏接口时会携带这个`token`,后台解析并返回该用户对应的数据

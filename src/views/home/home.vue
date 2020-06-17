@@ -20,27 +20,27 @@
     <el-container>
         <el-aside width="200px" class="aside">
             <el-menu default-active="2" :unique-opened="true" :router="true">
-                <el-submenu index="1">
+                <el-submenu v-for="(item,index) in menus" :key="index" :index="item.id | string">
                     <template slot="title">
                         <i class="el-icon-location"></i>
-                        <span>用户管理</span>
+                        <span>{{item.authName}}</span>
                     </template>
-                        <el-menu-item index="users">
+                        <el-menu-item v-for="(item1,index1) in item.children" :key="index1" :index="item1.path">
                             <i class="el-icon-menu"></i>
-                            <span slot="title">用户列表</span>
+                            <span slot="title">{{item1.authName}}</span>
                         </el-menu-item>
                     
                 </el-submenu>
-                <el-submenu index="2">
+                <!-- <el-submenu index="2">
                     <template slot="title">
                         <i class="el-icon-location"></i>
                         <span>权限管理</span>
                     </template>
-                        <el-menu-item index="2-1">
+                        <el-menu-item index="role">
                             <i class="el-icon-menu"></i>
                             <span slot="title">角色列表</span>
                         </el-menu-item>
-                        <el-menu-item index="2-2">
+                        <el-menu-item index="rights">
                             <i class="el-icon-menu"></i>
                             <span slot="title">权限列表</span>
                         </el-menu-item>
@@ -84,7 +84,7 @@
                         <el-menu-item index="5-1">选项1</el-menu-item>
                         <el-menu-item index="5-2">选项2</el-menu-item>
                     
-                </el-submenu>
+                </el-submenu> -->
                 
             </el-menu>
         </el-aside>
@@ -99,20 +99,28 @@
 export default {
     name:"home",
     data(){
-        return{}
+        return{
+            menus:[]
+        }
     },
     methods:{
         logout(){
-            localStorage.clear();
             this.$message.success('退出成功');
             this.$router.push({name:'login'});
+            localStorage.clear();
+        },
+        // 获取导航数据
+        async getMenus(){
+            const res = await this.$http.get(`menus`);
+            this.menus = res.data.data;
+            console.log(res);
         }
     },
     beforeCreate(){
-        const token = localStorage.getItem('token');
-        if(!token){
-            this.$router.push({name:'login'});
-        }
+        
+    },
+    created(){
+        this.getMenus()
     }
 }
 </script>

@@ -539,7 +539,7 @@ type=tree
     },
     "meta": {
         "msg": "创建成功",
-        "status": 201
+        "status": 200
     }
 }
 ```
@@ -600,7 +600,7 @@ type=tree
         "roleDesc": "测试角色描述"
     },
     "meta": {
-        "msg": "获取成功",
+        "msg": "更新成功",
         "status": 200
     }
 }

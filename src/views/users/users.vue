@@ -1,11 +1,12 @@
 <template>
 <el-card class="box-card">
     <!-- 1.面包屑 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
+    <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>用户管理</el-breadcrumb-item>
         <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    </el-breadcrumb> -->
+    <NavigationPath :pathArray="pathArray"/>
     <!-- 2.搜索框 -->
     <el-row class="searchRow">
         <el-col>
@@ -121,10 +122,12 @@
 </template>
 
 <script>
+import NavigationPath from '@/components/navigationPath'
 export default {
     name: 'users',
     data() {
         return {
+            pathArray:['用户管理','用户列表'],//路径导航数组
             query: '',
             total: -1,
             pagenum: "1",
@@ -158,6 +161,9 @@ export default {
             // 保存所有角色数据
             roles:[]
         }
+    },
+    components:{
+        NavigationPath,
     },
     created() {
         this.getUserList();
@@ -234,7 +240,7 @@ export default {
                             msg,
                             status
                         },
-                        data
+                        // data
                     } = res.data;
                     if (status === 201) {
                         this.$message.success(msg);
@@ -350,11 +356,6 @@ export default {
 <style lang="scss">
 .box-card {
     height: 100%;
-
-    .searchRow {
-        margin-top: 20px;
-    }
-
     .inputSearch {
         width: 300px;
         margin-right: 10px;
