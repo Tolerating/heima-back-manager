@@ -4,8 +4,8 @@ MyHttpServer.install = (Vue)=>{
     axios.defaults.baseURL = 'http://localhost:8080/';
     // 添加请求拦截器
     axios.interceptors.request.use(function (config){
+        console.log(config.url);
         if (config.url !== 'login') {
-            // console.log(config.url);
             config.headers['Authorization'] = localStorage.getItem('token') || '';
         }
         return config;

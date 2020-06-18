@@ -1,13 +1,36 @@
 # heima-back-manager
-b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=166
+b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=235
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    axisFormat %m-%d
+    title 黑马后台管理系统开发进度
+    section 系统前端
+    登录功能        :done,  des1,   2020-06-10,2020-06-11
+    用户列表        :done,  des2,   2020-06-11,3d
+    权限列表        :done,  des3,   after des2,2d
+    角色列表        :done,  des4,   after des3,2d
+    系统权限功能完成     :crit,done,    des5,   2020-06-16,2d
+    商品列表        :done,  des6,   after des5,1d
+    
+    section 系统后端
+    待开发          :     2020-06-11,2020-07-11
+```
+
+
 ### 目录介绍
+
 window下使用命令符`tree [drive:][path] [/F] [/A]`
+
 > 参数:
->   drive 盘符
-    path 文件路径
-    /F 递归列出所有文件
-    /A 使用ASCII字符,而不是用扩展字符
+> 1. drive 盘符
+> 2. path 文件路径
+> 3. /F 递归列出所有文件
+> 4. /A 使用ASCII字符,而不是用扩展字符
+
 输出到一个文件中:`tree [drive:][path] > [drive:][path]\r.txt`
+
 ```
 ├─mock //开发阶段数据模拟
 ├─public

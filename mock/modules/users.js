@@ -4,34 +4,6 @@ import Mock from 'mockjs'
  *@author: 刘凯
  *@date: 2020-06-14 22:57:28
 */
-// export function getUserList(){
-//     return{
-//         url:"/users",
-//         type:"get",
-//         data:Mock.mock({
-//             "data":{
-//                 total:10,
-//                 pagenum:1,
-//                 "users|2":[
-//                     {
-//                         "id|+1":1,
-//                         "username": "@cname",
-//                         "mobile":  /^1(5|3|7|8)[0-9]{9}$/,
-//                         "type": 1,
-//                         "email": "@email()",
-//                         "create_time": "@datetime",
-//                         "mg_state": true, 
-//                         "role_name": "炒鸡管理员"
-//                     }
-//                 ],
-//             },
-//             "meta": {
-//                 "msg": "获取成功",
-//                 "status": 200
-//             }
-//         })
-//     }
-// }
 /* 获取用户 */
 Mock.mock(/\/users[^/]/,"get",(opts)=>{
     console.warn("请求接口:获取用户",opts);

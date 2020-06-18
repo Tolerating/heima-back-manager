@@ -3,6 +3,8 @@ import * as login from './modules/login'
 require('./modules/users')
 require('./modules/role')
 require('./modules/rights')
+require('./modules/goods')
+require('./modules/goods_categories')
 fnCreate(login);
 // fnCreate(users,false);
 /**

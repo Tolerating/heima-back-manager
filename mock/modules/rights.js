@@ -225,7 +225,20 @@ Mock.mock(/menus$/i,'get',(opts)=>{
                   "children": []
                 }
             ]
-          }    
+          },
+          {
+            "id": 301,
+            "authName": "商品管理",
+            "path": "goods",
+            "children": [
+                {
+                    "id": 302,
+                    "authName": "商品列表",
+                    "path": "goods",
+                    "children": []
+                }
+            ]
+          }       
         ],
     "meta": {
         "msg": "获取菜单列表成功",
