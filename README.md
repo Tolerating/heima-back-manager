@@ -1,5 +1,5 @@
 # heima-back-manager
-b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=235
+b站视频看至https://www.bilibili.com/video/BV1PJ411X7Jp?p=254
 
 ```mermaid
 gantt
@@ -12,7 +12,7 @@ gantt
     权限列表        :done,  des3,   after des2,2d
     角色列表        :done,  des4,   after des3,2d
     系统权限功能完成     :crit,done,    des5,   2020-06-16,2d
-    商品列表        :done,  des6,   after des5,1d
+    商品列表        :done,  des6,   after des5,2d
     
     section 系统后端
     待开发          :     2020-06-11,2020-07-11
