@@ -248,11 +248,13 @@ export default {
       }
     },
     // 点击已上传的文件链接时的钩子
-    handlePreview(file) {},
+    handlePreview(file) {
+      console.log(file);
+    },
     // 图片移除时的方法
     handleRemove(file, fileList) {
       console.log("移除图片", file,fileList);
-      let index = this.form.pics.findIndex((value,index)=>{
+      let index = this.form.pics.findIndex((value)=>{
         return value.pic === file.response.data.url
       });
       this.form.pics.splice(index,1);
@@ -274,7 +276,7 @@ export default {
         return {attr_id:item.attr_id,attr_value:this.checkList[index]}
       });
       // 静态参数数组
-      let arr2 = this.arrStaticparams.map((item,index)=>{
+      let arr2 = this.arrStaticparams.map((item)=>{
         return {attr_id:item.attr_id,attr_value:item.attr_vals}
       });
       this.form.attrs = [...arr1,...arr2];

@@ -141,3 +141,22 @@ Mock.mock(/categories\/[0-9]+\/attributes\?[\w=]+$/i,'get',(opts)=>{
     }
    
 });
+
+/* 编辑提交参数(对应商品分类中的删除tag和添加tag) */
+Mock.mock(/categories\/[0-9]+\/attributes\/[0-9]+$/,'put',(opts)=>{
+    console.warn("请求接口:编辑提交参数(对应商品分类中的删除tag和添加tag)",opts);
+    return{
+        "data": {
+            "attr_id": 9,
+            "attr_name": "测试更新",
+            "cat_id": "43",
+            "attr_sel": "only",
+            "attr_write": "manual",
+            "attr_vals": "abc"
+        },
+        "meta": {
+            "msg": "更新成功",
+            "status": 200
+        }
+    }
+});

@@ -236,6 +236,12 @@ Mock.mock(/menus$/i,'get',(opts)=>{
                     "authName": "商品列表",
                     "path": "goods",
                     "children": []
+                },
+                {
+                    "id": 303,
+                    "authName": "商品分类",
+                    "path": "cateparams",
+                    "children": []
                 }
             ]
           }       
