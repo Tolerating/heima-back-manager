@@ -210,8 +210,8 @@ export default {
     // 获取三级分类的信息
     async getGoodCate() {
       const res = await this.$http.get("categories?type=3");
-      console.log(res);
-      this.options = res.data.data;
+      console.log(res.data.data);
+      this.options = res.data.data.result;
     },
     // 点击不同的tab时
     async tabChange() {

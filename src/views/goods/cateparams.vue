@@ -80,7 +80,32 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="静态参数" name="2">静态参数</el-tab-pane>
+      <el-tab-pane label="静态参数" name="2">
+        <el-button type="danger">设置动态参数</el-button>
+        <el-table :data="arrStaticparams">
+          <el-table-column type="index" label="#"></el-table-column>
+          <el-table-column label="属性名称" prop="attr_name"></el-table-column>
+          <el-table-column label="属性值" prop="attr_vals"></el-table-column>
+          <el-table-column label="操作">
+            <template>
+              <el-button
+                size="mini"
+                plain
+                type="primary"
+                icon="el-icon-edit"
+                circle
+              ></el-button>
+              <el-button
+                size="mini"
+                plain
+                type="danger"
+                icon="el-icon-delete"
+                circle
+              ></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
     </el-tabs>
   </el-card>
 </template>
@@ -88,10 +113,10 @@
 <script>
 import NavigationPath from "@/components/navigationPath";
 export default {
-  name: "users",
+  name: "cateparams",
   data() {
     return {
-      pathArray: ["商品管理", "商品分类"], //路径导航数组
+      pathArray: ["商品管理", "分类参数"], //路径导航数组
       activeName: "1",
       // 级联选择器绑定的数据
       options: [],
@@ -103,6 +128,7 @@ export default {
       },
       // 动态参数的数据数组
       arrDyparams: [],
+      arrStaticparams:[],
       // 动态参数的多选数据绑定数组
       // checkList: [],
       inputVisible: false,
@@ -117,6 +143,7 @@ export default {
       console.log("jilian", val);
       if (val.length === 0) {
         this.arrDyparams = [];
+        this.arrStaticparams = [];
       }
     },
   },
@@ -126,7 +153,7 @@ export default {
   methods: {
     async getGoodCate() {
       const res = await this.$http.get("categories?type=3");
-      this.options = res.data.data;
+      this.options = res.data.data.result;
     },
     // 级联选择器 @change触发的方法
     async handleChange() {
@@ -146,7 +173,16 @@ export default {
       }
     },
     // 点击选项卡
-    handleClick() {},
+    async handleClick() {
+      if (this.activeName === "2" && this.arrStaticparams.length === 0) {
+        if (this.selectedOptions.length === 3) {
+          const res = await this.$http.get(
+            `categories/${this.selectedOptions[2]}/attributes?sel=only`
+          );
+          this.arrStaticparams = res.data.data;
+        }
+      }
+    },
     // el-tag的关闭按钮
     async handleClose(categories, tag) {
       categories.attr_vals.splice(categories.attr_vals.indexOf(tag), 1);
