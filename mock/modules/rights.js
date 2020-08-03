@@ -250,7 +250,33 @@ Mock.mock(/menus$/i,'get',(opts)=>{
                     "children": []
                 }
             ]
-          }       
+          },
+          {
+            "id": 401,
+            "authName": "订单管理",
+            "path": "orders",
+            "children": [
+                {
+                    "id": 402,
+                    "authName": "订单列表",
+                    "path": "orders",
+                    "children": []
+                }
+            ]
+          },
+          {
+            "id": 501,
+            "authName": "数据统计",
+            "path": "reports",
+            "children": [
+                {
+                    "id": 502,
+                    "authName": "数据报表",
+                    "path": "reports",
+                    "children": []
+                }
+            ]
+          }                  
         ],
     "meta": {
         "msg": "获取菜单列表成功",

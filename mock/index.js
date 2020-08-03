@@ -5,6 +5,7 @@ require('./modules/role')
 require('./modules/rights')
 require('./modules/goods')
 require('./modules/goods_categories')
+require('./modules/order')
 fnCreate(login);
 // fnCreate(users,false);
 /**
